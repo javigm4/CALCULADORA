@@ -70,6 +70,7 @@
       numeros.push(parseFloat(pantalla.innerHTML)); // Añade el segundo número
       total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
       limpiar();
+      numeros = [total]; // Reinicia el array solo con el total
       pantalla.innerHTML = total; // Muestra el total en pantalla
     }
 
