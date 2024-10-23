@@ -40,10 +40,14 @@
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key");
+
       if (key === "clear") {
         limpiar();
-      } else if (key === "equals") {
+      } else if (key === "+") {
         suma();
+        operacion = "+"; // Marca la operación como suma
+      } else if (key === "equal") {
+        calcularResultado();
       } else {
         mostrar(key);
       }
@@ -57,23 +61,24 @@
       pantalla.innerHTML = "";
       numeros = [];
       total = 0;
+      operacion = null;
     }
 
     function suma() {
       if (pantalla.innerHTML) {
-        if (operacion === "+") {
-          // Verifica si la operación es suma
-          numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el segundo número
-          total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
-          limpiar(); // Limpia la pantalla
-          mostrar(total); // Muestra el resultado en pantalla
-          console.log(total); // Verifica el total calculado
-          numeros = [total]; // Guarda el resultado para futuras operaciones
-        } else {
-          numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el primer número
-          limpiar(); // Limpia la pantalla para ingresar el siguiente número
-        }
-        operacion = "+"; // Marca que la operación es suma
+        numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el número actual al array
+        limpiar(); // Limpia la pantalla para el siguiente número
+      }
+    }
+
+    function calcularResultado() {
+      if (pantalla.innerHTML && operacion === "+") {
+        numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el segundo número
+        total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
+        mostrar(total); // Muestra el resultado en pantalla
+        console.log(total); // Verifica el total calculado
+        numeros = [total]; // Guarda el resultado para futuras operaciones
+        operacion = null; // Resetea la operación
       } else {
         pantalla.innerHTML = "0";
       }
