@@ -39,9 +39,9 @@
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key");
-      if (key == "clear") {
+      if (key === "clear") {
         limpiar();
-      } else if (key == "equal") {
+      } else if (key === "equal") {
         suma();
       } else {
         mostrar(key);
@@ -62,9 +62,10 @@
       if (pantalla.innerHTML) {
         numeros.push(parseFloat(pantalla.innerHTML));
         total = numeros.reduce((acc, num) => acc + num, 0);
+        console.log(total); // Verifica el total calculado
         mostrar(total);
-        numeros = [total]; // Guardar el total para futuras sumas
-        pantalla.innerHTML = ""; // Limpiar la pantalla después de mostrar el total
+        numeros = [total];
+        pantalla.innerHTML = "";
       } else {
         pantalla.innerHTML = "0";
       }
