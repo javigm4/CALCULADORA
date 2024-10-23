@@ -36,12 +36,13 @@
     const pantalla = document.getElementById("screen");
     let numeros = [];
     let total = 0;
+    let operacion = null;
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key");
       if (key === "clear") {
         limpiar();
-      } else if (key === "equal") {
+      } else if (key === "equals") {
         suma();
       } else {
         mostrar(key);
@@ -60,12 +61,19 @@
 
     function suma() {
       if (pantalla.innerHTML) {
-        numeros.push(parseFloat(pantalla.innerHTML));
-        total = numeros.reduce((acc, num) => acc + num, 0);
-        // Limpia antes de mostrar el total
-        mostrar(total); // Muestra el total en pantalla
-        console.log(total); // Verifica el total calculado
-        numeros = [total]; // Mantiene el total para futuras operaciones
+        if (operacion === "+") {
+          // Verifica si la operación es suma
+          numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el segundo número
+          total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
+          limpiar(); // Limpia la pantalla
+          mostrar(total); // Muestra el resultado en pantalla
+          console.log(total); // Verifica el total calculado
+          numeros = [total]; // Guarda el resultado para futuras operaciones
+        } else {
+          numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el primer número
+          limpiar(); // Limpia la pantalla para ingresar el siguiente número
+        }
+        operacion = "+"; // Marca que la operación es suma
       } else {
         pantalla.innerHTML = "0";
       }
