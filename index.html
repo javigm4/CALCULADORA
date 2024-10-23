@@ -61,10 +61,10 @@
     function suma() {
       if (pantalla.innerHTML) {
         numeros.push(parseFloat(pantalla.innerHTML));
-        total = numeros.reduce((acc, num) => acc + num, 0) + console.log(total); //verificamos si funciona
+        total = numeros.reduce((acc, num) => acc + num, 0);
         mostrar(total);
-        numeros = [total];
-        pantalla.innerHTML = "";
+        numeros = [total]; // Guardar el total para futuras sumas
+        pantalla.innerHTML = ""; // Limpiar la pantalla después de mostrar el total
       } else {
         pantalla.innerHTML = "0";
       }
