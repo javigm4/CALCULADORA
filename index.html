@@ -42,9 +42,12 @@
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key"); //lo busque por internet, lo que hace es coger el data-key de los a y extraer su contenido, lo guardamos en una key y la imprimimos por pantalla
-      if (key == "clear" || key == "equal") {
+      if (key == "clear") {
         console.log(key);
         limpiar();
+      }
+      if (key == "equal") {
+        suma();
       } else {
         console.log(key); // Muestra en consola qué botón fue presionado (para ver si se ha hecho bien)
         mostrar(key);
