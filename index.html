@@ -32,48 +32,41 @@
     </div>
   </body>
   <script>
-    /*-------VARIABLES--------*/
     const botones = document.getElementById("buttons");
     const pantalla = document.getElementById("screen");
     let numeros = [];
-    let total = 0; // Inicializa total
-
-    /*-----FUNCIONES------*/
+    let total = 0;
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key");
       if (key == "clear") {
         limpiar();
       } else if (key == "equal") {
-        suma(); // Llama a la función suma
+        suma();
       } else {
-        mostrar(key); // Muestra el número ingresado
+        mostrar(key);
       }
     });
 
-    //---FUNCION MOSTRAR
     function mostrar(numero) {
-      pantalla.innerHTML += numero; // Imprime en pantalla
+      pantalla.innerHTML += numero;
     }
 
-    //---FUNCION LIMPIAR
     function limpiar() {
-      pantalla.innerHTML = ""; // Limpia la pantalla
-      numeros = []; // Limpia el array de números
-      total = 0; // Reinicia el total
-      console.log("pantalla limpiada");
+      pantalla.innerHTML = "";
+      numeros = [];
+      total = 0;
     }
 
-    //---FUNCION SUMA
     function suma() {
       if (pantalla.innerHTML) {
-        numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el número actual al array
-        total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
-        mostrar(total); // Muestra el total en pantalla
-        numeros = [total]; // Guarda el total para futuras sumas
-        pantalla.innerHTML = ""; // Limpia la pantalla después de mostrar el total
+        numeros.push(parseFloat(pantalla.innerHTML));
+        total = numeros.reduce((acc, num) => acc + num, 0);
+        mostrar(total);
+        numeros = [total];
+        pantalla.innerHTML = "";
       } else {
-        pantalla.innerHTML = "0"; // Si no hay número, muestra 0
+        pantalla.innerHTML = "0";
       }
     }
   </script>
