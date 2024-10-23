@@ -34,14 +34,13 @@
   <script>
     const botones = document.getElementById("buttons");
     const pantalla = document.getElementById("screen");
-    let total = 0;
-    let operacion = null;
+    let total = 0; // Almacena el total acumulado
+    let operacion = null; // Almacena la operación actual
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key");
       if (key === "clear") {
         limpiar();
-        numeros = [];
       } else if (key === "equal") {
         if (operacion === "+") {
           suma();
@@ -49,39 +48,50 @@
           resta();
         }
       } else if (key === "+" || key === "-") {
-        operacion = key;
-        numeros.push(parseFloat(pantalla.innerHTML)); // Guarda el número antes de operar
-        limpiar();
+        if (pantalla.innerHTML) {
+          if (operacion) {
+            suma(); // Si ya hay una operación, realiza la suma primero
+          }
+          total = parseFloat(pantalla.innerHTML); // Almacena el número actual como total
+          operacion = key; // Guarda la operación
+          limpiarPantalla(); // Limpia la pantalla
+        }
       } else {
         mostrar(key);
       }
     });
 
     function mostrar(numero) {
-      pantalla.innerHTML += numero;
+      pantalla.innerHTML += numero; // Muestra el número en la pantalla
     }
 
     function limpiar() {
-      pantalla.innerHTML = "";
-      total = null; // Reinicia total
+      pantalla.innerHTML = ""; // Limpia la pantalla
+      total = 0; // Reinicia el total
       operacion = null; // Reinicia la operación
     }
 
     function limpiarPantalla() {
-      pantalla.innerHTML = ""; // Solo limpia la pantalla, pero mantiene el total
+      pantalla.innerHTML = ""; // Limpia solo la pantalla
     }
 
     function suma() {
       const numeroActual = parseFloat(pantalla.innerHTML); // Captura el número actual en pantalla
-      total += numeroActual; // Suma el número actual al total
+      if (!isNaN(numeroActual)) {
+        // Verifica que el número sea válido
+        total += numeroActual; // Suma el número actual al total
+      }
       limpiarPantalla();
       pantalla.innerHTML = total; // Muestra el total en pantalla
     }
 
     function resta() {
       const numeroActual = parseFloat(pantalla.innerHTML); // Captura el número actual en pantalla
-      total -= numeroActual; // Resta el número actual al total
-      limpiar();
+      if (!isNaN(numeroActual)) {
+        // Verifica que el número sea válido
+        total -= numeroActual; // Resta el número actual del total
+      }
+      limpiarPantalla();
       pantalla.innerHTML = total; // Muestra el total en pantalla
     }
   </script>
