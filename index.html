@@ -62,7 +62,7 @@
       if (pantalla.innerHTML) {
         numeros.push(parseFloat(pantalla.innerHTML));
         total = numeros.reduce((acc, num) => acc + num, 0);
-        limpiar(); // Limpia antes de mostrar el total
+        // Limpia antes de mostrar el total
         mostrar(total); // Muestra el total en pantalla
         console.log(total); // Verifica el total calculado
         numeros = [total]; // Mantiene el total para futuras operaciones
