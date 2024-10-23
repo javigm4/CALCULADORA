@@ -63,7 +63,7 @@
         numeros.push(parseFloat(pantalla.innerHTML));
         total = numeros.reduce((acc, num) => acc + num, 0);
         mostrar(total); // no va
-
+        limpiar();
         console.log(total); // Verifica el total calculado
         numeros = [total];
       } else {
