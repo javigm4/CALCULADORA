@@ -34,7 +34,6 @@
   <script>
     const botones = document.getElementById("buttons");
     const pantalla = document.getElementById("screen");
-    let numeros = [];
     let total = 0;
     let operacion = null;
 
@@ -74,10 +73,9 @@
     }
 
     function resta() {
-      numeros.push(parseFloat(pantalla.innerHTML)); // Añade el segundo número
-      total = numeros.reduce((acc, num) => acc - num); // Resta los números
+      const numeroActual = parseFloat(pantalla.innerHTML); // Captura el número actual en pantalla
+      total -= numeroActual; // Resta el número actual al total
       limpiar();
-      numeros = [total]; // Reinicia el array solo con el total
       pantalla.innerHTML = total; // Muestra el total en pantalla
     }
   </script>
