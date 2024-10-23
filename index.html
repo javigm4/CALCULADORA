@@ -36,52 +36,45 @@
     const botones = document.getElementById("buttons");
     const pantalla = document.getElementById("screen");
     let numeros = [];
-    let operacion = null;
+    let total = 0; // Inicializa total
 
     /*-----FUNCIONES------*/
 
     botones.addEventListener("click", function (e) {
-      const key = e.target.getAttribute("data-key"); //lo busque por internet, lo que hace es coger el data-key de los a y extraer su contenido, lo guardamos en una key y la imprimimos por pantalla
+      const key = e.target.getAttribute("data-key");
       if (key == "clear") {
-        console.log(key);
         limpiar();
-      }
-      if (key == "equal") {
-        suma();
+      } else if (key == "equal") {
+        suma(); // Llama a la función suma
       } else {
-        console.log(key); // Muestra en consola qué botón fue presionado (para ver si se ha hecho bien)
-        mostrar(key);
+        mostrar(key); // Muestra el número ingresado
       }
     });
+
     //---FUNCION MOSTRAR
     function mostrar(numero) {
-      pantalla.innerHTML += numero; //imprimimos por pantalla agregando el numero a lo que ya hay
+      pantalla.innerHTML += numero; // Imprime en pantalla
     }
 
     //---FUNCION LIMPIAR
     function limpiar() {
-      pantalla.innerHTML = "";
+      pantalla.innerHTML = ""; // Limpia la pantalla
+      numeros = []; // Limpia el array de números
+      total = 0; // Reinicia el total
       console.log("pantalla limpiada");
     }
 
     //---FUNCION SUMA
-    let total = 0;
     function suma() {
       if (pantalla.innerHTML) {
-        let total = 0;
-
-        function suma() {
-          if (pantalla.innerHTML) {
-            numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el número actual al array
-          }
-          total = numeros.reduce((acc, num) => acc + num, 0); //sumar los numeros
-          mostrar(total); //mostrar el total por pantalla
-          numeros = [];
-        }
+        numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el número actual al array
+        total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
+        mostrar(total); // Muestra el total en pantalla
+        numeros = [total]; // Guarda el total para futuras sumas
+        pantalla.innerHTML = ""; // Limpia la pantalla después de mostrar el total
       } else {
-        pantalla.innerHTML = "0";
+        pantalla.innerHTML = "0"; // Si no hay número, muestra 0
       }
-      botones.addEventListener("click", function (e) {});
     }
   </script>
 </html>
