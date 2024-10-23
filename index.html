@@ -40,14 +40,18 @@
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key");
-
       if (key === "clear") {
         limpiar();
-      } else if (key === "+") {
-        suma();
-        operacion = "+"; // Marca la operación como suma
       } else if (key === "equal") {
-        calcularResultado();
+        if (operacion === "+") {
+          suma();
+        } else if (operacion === "-") {
+          resta();
+        }
+      } else if (key === "+" || key === "-") {
+        operacion = key;
+        numeros.push(parseFloat(pantalla.innerHTML)); // Guarda el número antes de operar
+        limpiar();
       } else {
         mostrar(key);
       }
@@ -59,29 +63,22 @@
 
     function limpiar() {
       pantalla.innerHTML = "";
-      numeros = [];
-      total = 0;
-      operacion = null;
     }
 
     function suma() {
-      if (pantalla.innerHTML) {
-        numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el número actual al array
-        limpiar(); // Limpia la pantalla para el siguiente número
-      }
+      numeros.push(parseFloat(pantalla.innerHTML)); // Añade el segundo número
+      total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
+      limpiar();
+      numeros = [total]; // Reinicia el array solo con el total
+      pantalla.innerHTML = total; // Muestra el total en pantalla
     }
 
-    function calcularResultado() {
-      if (pantalla.innerHTML && operacion === "+") {
-        numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el segundo número
-        total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
-        mostrar(total); // Muestra el resultado en pantalla
-        console.log(total); // Verifica el total calculado
-        numeros = [total]; // Guarda el resultado para futuras operaciones
-        operacion = null; // Resetea la operación
-      } else {
-        pantalla.innerHTML = "0";
-      }
+    function resta() {
+      numeros.push(parseFloat(pantalla.innerHTML)); // Añade el segundo número
+      total = numeros.reduce((acc, num) => acc - num); // Resta los números
+      limpiar();
+      numeros = [total]; // Reinicia el array solo con el total
+      pantalla.innerHTML = total; // Muestra el total en pantalla
     }
   </script>
 </html>
