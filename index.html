@@ -61,7 +61,7 @@
     function suma() {
       if (pantalla.innerHTML) {
         numeros.push(parseFloat(pantalla.innerHTML));
-        total = numeros.reduce((acc, num) => acc + num, 0);
+        total = numeros.reduce((acc, num) => acc + num, 0) + console.log(total); //verificamos si funciona
         mostrar(total);
         numeros = [total];
         pantalla.innerHTML = "";
