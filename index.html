@@ -67,10 +67,9 @@
     }
 
     function suma() {
-      numeros.push(parseFloat(pantalla.innerHTML)); // Añade el segundo número
-      total = numeros.reduce((acc, num) => acc + num, 0); // Suma los números
+      const numeroActual = parseFloat(pantalla.innerHTML); // Captura el número actual en pantalla
+      total += numeroActual; // Suma el número actual al total
       limpiar();
-      numeros = [total]; // Reinicia el array solo con el total
       pantalla.innerHTML = total; // Muestra el total en pantalla
     }
 
