@@ -32,11 +32,13 @@
     </div>
   </body>
   <script>
-    /*variables*/
+    /*-------VARIABLES--------*/
     const botones = document.getElementById("buttons");
     const pantalla = document.getElementById("screen");
+    let numeros = [];
+    let operacion = null;
 
-    /*funciones*/
+    /*-----FUNCIONES------*/
 
     botones.addEventListener("click", function (e) {
       const key = e.target.getAttribute("data-key"); //lo busque por internet, lo que hace es coger el data-key de los a y extraer su contenido, lo guardamos en una key y la imprimimos por pantalla
@@ -59,6 +61,24 @@
       console.log("pantalla limpiada");
     }
 
-    function suma() {}
+    //---FUNCION SUMA
+    let total = 0;
+    function suma() {
+      if (pantalla.innerHTML) {
+        let total = 0;
+
+        function suma() {
+          if (pantalla.innerHTML) {
+            numeros.push(parseFloat(pantalla.innerHTML)); // Agrega el número actual al array
+          }
+          total = numeros.reduce((acc, num) => acc + num, 0); //sumar los numeros
+          mostrar(total); //mostrar el total por pantalla
+          numeros = [];
+        }
+      } else {
+        pantalla.innerHTML = "0";
+      }
+      botones.addEventListener("click", function (e) {});
+    }
   </script>
 </html>
