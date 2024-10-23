@@ -62,11 +62,10 @@
       if (pantalla.innerHTML) {
         numeros.push(parseFloat(pantalla.innerHTML));
         total = numeros.reduce((acc, num) => acc + num, 0);
+        mostrar(total); // no va
 
         console.log(total); // Verifica el total calculado
-        mostrar(total);
         numeros = [total];
-        pantalla.innerHTML = total;
       } else {
         pantalla.innerHTML = "0";
       }
