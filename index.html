@@ -63,12 +63,18 @@
 
     function limpiar() {
       pantalla.innerHTML = "";
+      total = null; // Reinicia total
+      operacion = null; // Reinicia la operación
+    }
+
+    function limpiarPantalla() {
+      pantalla.innerHTML = ""; // Solo limpia la pantalla, pero mantiene el total
     }
 
     function suma() {
       const numeroActual = parseFloat(pantalla.innerHTML); // Captura el número actual en pantalla
       total += numeroActual; // Suma el número actual al total
-      limpiar();
+      limpiarPantalla();
       pantalla.innerHTML = total; // Muestra el total en pantalla
     }
 
